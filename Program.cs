@@ -1,54 +1,63 @@
-﻿// Задача 10: Напишите программу, которая принимает на вход трёхзначное число и на выходе показывает вторую цифру этого числа.
+﻿//Задача 2: Напишите программу, которая на вход принимает два числа и выдаёт, какое число большее, а какое меньшее.
 /*
-int ExtractDigit(int number)
-{
-    int a = number / 10;
-    int b = a % 10;
-    return b;
-}
+Console.Write("Input first number: ");
+int firstNumber = Convert.ToInt32(Console.ReadLine());
+Console.Write("Input second number: ");
+int secondNumber = Convert.ToInt32(Console.ReadLine());
 
-Console.Write("Input a three-digit number: ");
-int num = Convert.ToInt32(Console.ReadLine());
-
-Console.WriteLine($"Second digit of {num} is {ExtractDigit(num)}");*/
-
-//Задача 13: Напишите программу, которая выводит третью цифру заданного числа или сообщает, что третьей цифры нет.
-
-int ThirdDigit(int number)
-
-{
-    if (number / 100 > 0)
-       { while (number / 1000 > 0)
-        {
-            number = number / 10;
-        }
-        number = number % 10;
-    }
-    else
-        number = -1;
-
-    return number;    
-}
-
-Console.Write("Input a number: ");
-int num = Convert.ToInt32(Console.ReadLine());
-int result = ThirdDigit(num);
-
-if (result == -1)
-    Console.WriteLine($"There is no 3d digit in {num}");
+if (firstNumber == secondNumber)
+    Console.WriteLine("Given numbers are equal");
 else
-    Console.WriteLine($"Third digit of {num} is {result}");
 
-//Задача 15: Напишите программу, которая принимает на вход цифру, обозначающую день недели, и проверяет, является ли этот день выходным.
-/*
-bool WeekDay(int number)
+if(firstNumber > secondNumber)
 {
-    if (number == 6 || number == 7)
-        return true;
-    else
-        return false;
+    Console.WriteLine($"Number {firstNumber} is bigger than number {secondNumber}");
+}
+else
+    Console.WriteLine($"Number {secondNumber} is bigger than number {firstNumber}");
+*/
+
+//Задача 4: Напишите программу, которая принимает на вход три числа и выдаёт максимальное из этих чисел.
+/*
+Console.Write("Input first number: ");
+int number1 = Convert.ToInt32(Console.ReadLine());
+Console.Write("Input second number: ");
+int number2 = Convert.ToInt32(Console.ReadLine());
+Console.Write("Input third number: ");
+int number3 = Convert.ToInt32(Console.ReadLine());
+int max = number1;
+
+if(number2 > max) 
+{
+    max = number2;
+}
+if(number3 > max)
+{
+    max = number3;
 }
 
-Console.Write("Input day of the week in digit: ");
-int weekDay = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine(WeekDay(weekDay));*/ 
+Console.WriteLine("Max number is " + max);*/
+
+//Задача 6: Напишите программу, которая на вход принимает число и выдаёт, является ли число чётным (делится ли оно на два без остатка).
+/*
+Console.Write("Input an integer number: ");
+int number = Convert.ToInt32(Console.ReadLine());
+
+if(number % 2 == 0)
+    Console.WriteLine($"{number} is even");
+else
+    Console.WriteLine($"{number} is odd");*/
+
+//Задача 8: Напишите программу, которая на вход принимает число (N), а на выходе показывает все чётные числа от 1 до N.
+
+Console.Write("Input a positive integer number: ");
+int number = Convert.ToInt32(Console.ReadLine());
+int currentNumber = 2;
+
+while(currentNumber <= number)
+{
+    if(currentNumber % 2 == 0)
+   { Console.Write(currentNumber + " ");
+   }
+   currentNumber = currentNumber+2;
+}
