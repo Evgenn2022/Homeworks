@@ -1,54 +1,98 @@
-﻿// Задача 10: Напишите программу, которая принимает на вход трёхзначное число и на выходе показывает вторую цифру этого числа.
-/*
-int ExtractDigit(int number)
-{
-    int a = number / 10;
-    int b = a % 10;
-    return b;
+﻿//Задача 19. Напишите программу, которая принимает на вход пятизначное число и проверяет, является ли оно палиндромом.";
+//Задача 21. Напишите программу, которая принимает на вход координаты двух точек и находит расстояние между ними в 3D пространстве.";
+//Задача 23. Напишите программу, которая принимает на вход число (N) и выдаёт таблицу кубов чисел от 1 до N.";
+foreach(string s in tasks){
+    Console.Write(s+"\n");
 }
 
-Console.Write("Input a three-digit number: ");
-int num = Convert.ToInt32(Console.ReadLine());
+// main input cycle
+int iTaskChoice = 0;
+while(true){
+    Console.Write("Выберите задачу (1-3): ");
+    char chTaskChoice;
 
-Console.WriteLine($"Second digit of {num} is {ExtractDigit(num)}");*/
-
-//Задача 13: Напишите программу, которая выводит третью цифру заданного числа или сообщает, что третьей цифры нет.
-
-int ThirdDigit(int number)
-
-{
-    if (number / 100 > 0)
-       { while (number / 1000 > 0)
-        {
-            number = number / 10;
-        }
-        number = number % 10;
+    chTaskChoice = Console.ReadKey().KeyChar;
+    string ch = Convert.ToString(chTaskChoice);
+    if (!int.TryParse(ch, out iTaskChoice)) {
+        Console.Clear();
+        Console.WriteLine("\nОшибка ввода, попробуйте ещё раз! ");
+        continue;
     }
-    else
-        number = -1;
-
-    return number;    
+    if (iTaskChoice <= 0 || iTaskChoice > 3) {
+        Console.Clear();
+        Console.WriteLine("\nЗадание не найдено, Попробуйте ещё раз! ");
+        continue;
+    } else break;
 }
 
-Console.Write("Input a number: ");
-int num = Convert.ToInt32(Console.ReadLine());
-int result = ThirdDigit(num);
-
-if (result == -1)
-    Console.WriteLine($"There is no 3d digit in {num}");
-else
-    Console.WriteLine($"Third digit of {num} is {result}");
-
-//Задача 15: Напишите программу, которая принимает на вход цифру, обозначающую день недели, и проверяет, является ли этот день выходным.
-/*
-bool WeekDay(int number)
-{
-    if (number == 6 || number == 7)
-        return true;
-    else
-        return false;
+// complex solution for the first task
+void palindumber(){
+    int[] fdArray = new int[5];
+    int i = 1;
+    while(i - 1 < fdArray.Length) {
+        Console.Write($"\nВведите цифру {i}: ");
+        char ch = Console.ReadKey().KeyChar;
+        if (!int.TryParse(ch.ToString(), out fdArray[i - 1])){
+            Console.WriteLine("Некорректный ввод! Ожидось число.");
+            continue;
+        }
+        i++;
+    }
+    string ans = $"\nЧисло {fdArray[0]}{fdArray[1]}{fdArray[2]}{fdArray[3]}{fdArray[4]} ";
+    if (!(fdArray[0] == fdArray[4] &&
+        fdArray[1] == fdArray [3]))
+        ans+="не ";
+    Console.WriteLine(ans+"является палиндромом!");
 }
 
-Console.Write("Input day of the week in digit: ");
-int weekDay = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine(WeekDay(weekDay));*/ 
+// complex solution for the second task
+void distanceFinder() {
+    double[] tdArray = new double[6];
+    int i = 1;
+    Console.WriteLine("\nВведите последовательно координаты двух точек вида (a,b,c):");
+    while(i - 1 < tdArray.Length) {
+        Console.Write($"Введите число с плавающей запятой двойной точности {i}: ");
+        if (!double.TryParse(Console.ReadLine(), out tdArray[i - 1])){
+            Console.WriteLine("Некорректный ввод! Ожидось число с плавающей запятой двойной точности.");
+            continue;
+        }
+        i++;
+    }
+    // 3D distance formula directly from wiki :)
+    double distance = Math.Sqrt(Math.Pow(tdArray[3] - tdArray[0], 2) + 
+                                Math.Pow(tdArray[4] - tdArray[1], 2) +
+                                Math.Pow(tdArray[5] - tdArray[2], 2));
+    Console.WriteLine($"Расстояние между точками ({tdArray[0]};{tdArray[1]};{tdArray[2]}) и ({tdArray[3]};{tdArray[4]};{tdArray[5]}): {Math.Round(distance, 2)}");
+}
+
+// complex solustion for the third task
+void qubeTables() {
+    int integer;
+    Console.WriteLine("\n");
+    while(true){
+        Console.Write("Введите целое число: ");
+        if (!int.TryParse(Console.ReadLine(),out integer)){
+            Console.WriteLine("Некорректный ввод!");
+            continue;
+        }
+        else break;
+    }
+    for (int i = 1; i <= integer;i++)
+        Console.WriteLine($"{i}^3 = {i*i*i}"); // it must work faster than Math.Pow
+}
+
+// selector
+switch(iTaskChoice){
+    case 1:
+        palindumber(); 
+        break;
+    case 2:
+        distanceFinder();
+        break;
+    case 3:
+        qubeTables();
+        break;
+    default:
+        Console.WriteLine("Задание не найдено! Выход...");
+        return;
+}
